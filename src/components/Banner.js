@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect, useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link,useNavigate } from 'react-router-dom';
 import { AuthContext } from '../AuthContext';
 
 const NavItem = ({ to, onClick, children }) => (
@@ -31,9 +31,12 @@ const Banner = ({ userEmail, toggleUserMenu, isUserMenuOpen }) => {
   const [openDropdown, setOpenDropdown] = useState(null);
   const [isMenuOpen, setIsMenuOpen] = useState(true);
   const { isLoggedIn, email } = useContext(AuthContext);
+  const { setIsLoggedIn, setEmail } = useContext(AuthContext); // Sử dụng AuthContext để cập nhật trạng thái
+
   const dropdownRef1 = useRef(null);
   const dropdownRef2 = useRef(null);
   const dropdownRef3 = useRef(null);
+  const navigate = useNavigate();
 
   const toggleDropdown = (index) => {
     setOpenDropdown(openDropdown === index ? null : index);
@@ -52,6 +55,19 @@ const Banner = ({ userEmail, toggleUserMenu, isUserMenuOpen }) => {
     ) {
       setOpenDropdown(null);
     }
+  };
+
+  const handleLogout = () => {
+    // Xóa trạng thái đăng nhập khỏi localStorage
+    localStorage.removeItem('isLoggedIn');
+    localStorage.removeItem('email');
+    
+    // Cập nhật trạng thái trong AuthContext
+    setIsLoggedIn(false);
+    setEmail('');
+
+    // Điều hướng người dùng đến trang đăng nhập
+    navigate('/');
   };
 
   useEffect(() => {
@@ -77,7 +93,7 @@ const Banner = ({ userEmail, toggleUserMenu, isUserMenuOpen }) => {
   const dropdownItemsAcc = [
     { label: 'Quản lý bài viết', path: '/Subs', onClick: () => setOpenDropdown(null) },
     { label: 'Hồ sơ cá nhân', path: '/Profile', onClick: () => setOpenDropdown(null) },
-    { label: 'Đăng xuất', path: '/', onClick: () => setOpenDropdown(null) },
+    { label: 'Đăng xuất', path: '/', onClick: () => {setOpenDropdown(null);handleLogout(); }},
   ];
 
   return (
