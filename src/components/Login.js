@@ -58,6 +58,7 @@ const Login = () => {
         alert("Đăng nhập thành công!");
         setIsLoggedIn(true);
         setEmail(user.email);
+        window.scrollTo(0, 0);
 
           // Lưu vào localStorage
         localStorage.setItem('isLoggedIn', 'true');

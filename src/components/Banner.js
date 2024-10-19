@@ -30,8 +30,8 @@ const Banner = ({ userEmail, toggleUserMenu, isUserMenuOpen }) => {
 
   const [openDropdown, setOpenDropdown] = useState(null);
   const [isMenuOpen, setIsMenuOpen] = useState(true);
-  const { isLoggedIn, email } = useContext(AuthContext);
-  const { setIsLoggedIn, setEmail } = useContext(AuthContext); // Sử dụng AuthContext để cập nhật trạng thái
+  const { isLoggedIn, email ,setIsLoggedIn, setEmail} = useContext(AuthContext);
+ 
 
   const dropdownRef1 = useRef(null);
   const dropdownRef2 = useRef(null);
@@ -65,7 +65,7 @@ const Banner = ({ userEmail, toggleUserMenu, isUserMenuOpen }) => {
     // Cập nhật trạng thái trong AuthContext
     setIsLoggedIn(false);
     setEmail('');
-
+    alert("Đăng xuất thành công");
     // Điều hướng người dùng đến trang đăng nhập
     navigate('/');
   };
@@ -135,7 +135,6 @@ const Banner = ({ userEmail, toggleUserMenu, isUserMenuOpen }) => {
             <NavItem to="/Submission" onClick={() => setIsMenuOpen(false)}>Gửi bài</NavItem>
           </li>
           {isLoggedIn ? (
-            
             <Dropdown
               title={email}
               items={dropdownItemsAcc}

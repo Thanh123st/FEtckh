@@ -1,5 +1,7 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { Route, Link, Routes } from 'react-router-dom';
+import React, { useState, useRef, useEffect,useContext } from 'react';
+import { Link,useNavigate } from 'react-router-dom';
+import { AuthContext } from '../AuthContext';
+
 import './Wizard.css';
 
 const NavItem = ({ to, onClick, children }) => (
@@ -11,6 +13,8 @@ const NavItem = ({ to, onClick, children }) => (
 const HeaderSub = () => {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
+  const { isLoggedIn, email ,setIsLoggedIn, setEmail} = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const toggleDropdown = () => {
     setIsOpen((prev) => !prev);
@@ -35,7 +39,7 @@ const HeaderSub = () => {
 
   const items = [
     { path: '/profile', label: 'Hồ sơ cá nhân' },
-    { path: '/logout', label: 'Đăng xuất' },
+    { path: '/', label: 'Đăng xuất', onClick: () => handleLogout() },
   ];
 
   const Dropdown = React.forwardRef(({ title, items, isOpen, onToggle }, ref) => (
@@ -47,7 +51,7 @@ const HeaderSub = () => {
       {isOpen && (
         <div className="nav-item-hidden">
           {items.map((item, index) => (
-            <NavItem key={index} to={item.path}>
+            <NavItem key={index} to={item.path} onClick={item.onClick}>
               {item.label}
             </NavItem>
           ))}
@@ -56,6 +60,18 @@ const HeaderSub = () => {
     </li>
   ));
 
+  const handleLogout = () => {
+    // Xóa trạng thái đăng nhập khỏi localStorage
+    localStorage.removeItem('isLoggedIn');
+    localStorage.removeItem('email');
+    
+    // Cập nhật trạng thái trong AuthContext
+    setIsLoggedIn(false);
+    setEmail('');
+    alert("Đăng xuất thành công");
+    // Điều hướng người dùng đến trang đăng nhập
+    navigate('/');
+  };
   return (
     <div id="navigationUserWrapper">
       <div className="left-group">

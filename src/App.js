@@ -22,6 +22,7 @@ import DetailArticle from './componentswizard/DetailArticle';
 import Profile from './componentswizard/Profile';
 import Subs from './componentswizard/Subs';
 import Wizard from './componentswizard/Wizard';
+import ProtectedRoute from './ProtectedRoute';
 
 // Bắt đầu App
 function App() {
@@ -51,10 +52,10 @@ function App() {
             <Route path="/Layoutview" element={<Layoutview />} />
             <Route path="/Login" element={<Login />} />
             <Route path="/Register" element={<Register />} />
-            <Route path="/Subs" element={<Subs />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/wizard" element={<Wizard />} />
-            <Route path="/detailArticle" element={<DetailArticle />} />
+            <Route path="/Subs" element={<ProtectedRoute><Subs /></ProtectedRoute>} />
+            <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
+            <Route path="/wizard" element={<ProtectedRoute><Wizard /></ProtectedRoute>} />
+            <Route path="/detailArticle" element={<ProtectedRoute><DetailArticle /></ProtectedRoute>} />
           </Routes>
         </main>
       </Router>
