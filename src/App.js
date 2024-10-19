@@ -29,6 +29,7 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);  // Giá trị mặc định là false
   const [email, setEmail] = useState('');  // Email ban đầu là chuỗi rỗng
 
+  
   return (
     // AuthContext.Provider với các state đã được khai báo
     <AuthProvider value={{ isLoggedIn, setIsLoggedIn, email, setEmail }}>

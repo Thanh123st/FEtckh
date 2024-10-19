@@ -15,6 +15,18 @@ const Login = () => {
   const { isLoggedIn, setIsLoggedIn, email, setEmail } = useContext(AuthContext); // Lấy giá trị từ AuthContext
 
   useEffect(() => {
+    const storedLoggedIn = localStorage.getItem('isLoggedIn');
+    const storedEmail = localStorage.getItem('email');
+
+    if (storedLoggedIn === 'true' && storedEmail) {
+      setIsLoggedIn(true);
+      setEmail(storedEmail);
+    }
+  }, [setIsLoggedIn, setEmail]);
+
+  
+
+  useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get('http://localhost:3000/api/users');
@@ -46,6 +58,10 @@ const Login = () => {
         alert("Đăng nhập thành công!");
         setIsLoggedIn(true);
         setEmail(user.email);
+
+          // Lưu vào localStorage
+        localStorage.setItem('isLoggedIn', 'true');
+        localStorage.setItem('email', user.email);
         navigate('/');
       } else {
         setError('Tên đăng nhập hoặc mật khẩu không đúng');
