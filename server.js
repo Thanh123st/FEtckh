@@ -1,50 +1,21 @@
 const express = require('express');
 const cors = require('cors');
-
 const app = express();
-const PORT = 3000;
 
-// Middleware
-app.use(cors());
-app.use(express.json());
+// Cấu hình CORS để chỉ cho phép domain cụ thể
+app.use(cors({
+    origin: 'http://localhost:3000',  // Địa chỉ của frontend ReactJS
+    methods: 'GET, POST',            // Cho phép các phương thức GET và POST
+    allowedHeaders: 'Content-Type, Authorization'  // Cho phép header Authorization
+}));
 
-// Dữ liệu mẫu
-const users = [
-    { id: "1", username: "testUser", password: "testPassword",email:"test@gmail.com" },
-    { id: "2", username: "admin", password: "adminpassword",email:"addmin@gmail.com" },
-    { id: "3", username: "tao", password: "tao" ,email:"taotaotao@gmail.com"}
-];
-
-// Đường dẫn API
-app.get('/api/users', (req, res) => {
-    res.json(users);
+// Các route khác của bạn
+app.get('/api/detail', (req, res) => {
+    res.json({ message: 'Dữ liệu từ API' });
 });
 
-// Đường dẫn API đăng nhập
-app.post('/api/login', (req, res) => {
-    const { username, password } = req.body;
-
-    // Kiểm tra thông tin đăng nhập
-    const user = users.find(user => user.username === username && user.password === password);
-
-    if (user) {
-        // Nếu đăng nhập thành công, trả về email của người dùng
-        res.json({
-            success: true,
-            email: user.email
-        });
-    } else {
-        // Nếu đăng nhập thất bại
-        res.json({
-            success: false,
-            message: 'Sai tên người dùng hoặc mật khẩu'
-        });
-    }
-});
-
-// Khởi động server
+const PORT = 3000;  // Hoặc port bạn đang sử dụng
 app.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}`);
+    console.log(`Server đang chạy trên http://localhost:${PORT}`);
 });
-
 

@@ -21,3 +21,10 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+
+
+if (na <= nb + 10) {
+    sem_post(&mutex);
+    break;
+}

@@ -4,11 +4,8 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { BrowserRouter } from 'react-router-dom';
-import './index.css'; // Kiểm tra CSS để không xung đột với Bootstrap
+import './Css/index.css';
 import App from './App'; 
-import App2 from './App2'; 
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -18,3 +15,9 @@ root.render(
 
   </React.StrictMode>
 );
+
+// Set css của tiniMce
+// Chỉnh lại Logic Logout
+// Sữa lại giao diện
+// Chỉnh get cái lưu trữ với chưa xong
+// Làm dùng Redux

@@ -19,8 +19,8 @@ const Fooster = () => {
       <p>Tổng Biên tập: Nguyễn Thị Thành Thanh</p>
       <p>Phó Tổng Biên tập: Nguyễn Hoàng Cát Tuấn</p>
       <p>Website: <a href="https://ctuet.edu.vn/index.php">ctuet.edu.vn</a></p>
-      <p>Email: phonghanhchinh@ctuet.edu.vn</p>
-      <p>Điện thoại: 02923894050</p>
+      <p>Email: tapchikhoahoc@ctuet.edu.vn</p>
+      <p>Điện thoại: 02923899117</p>
       </div>
       </div>
     </footer>
